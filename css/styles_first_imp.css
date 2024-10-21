@@ -1,0 +1,142 @@
+/* eng font */
+/* font-family: "Agdasima", sans-serif;
+  font-weight: 700;
+  font-style: normal; */
+
+/* kor font */
+/* font-family: "Dongle", sans-serif; 
+  font-weight: 400;
+  font-style: normal; */
+
+/* 외부 폰트 삽입 */
+@import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Dongle&display=swap");
+
+/* 전역 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 개선 내용 > 해당 디자인은 불필요 */
+/* .layout {
+  width: 100vw;
+  height: 80vh;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+} */
+
+/* 개선 내용 > 
+1.위드와 높이 값 수정 >> px > %,vh 
+2.위치값,애니메이션,트랜스폼 값 삭제
+3.오버플로우 추가
+4.텍스트 정렬
+*/
+.slide_container {
+  font-family: "Agdasima", sans-serif, "Dongle";
+  font-weight: 400;
+  font-style: normal;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  text-align: center;
+  /* transform: perspective(1000px);
+  transform-style: preserve-3d; */
+  /* animation: autoShow 20s linear infinite; */
+  /* left: 0;
+  top: calc(80vh-400px); */
+}
+
+/* 개선 내용 >  
+1.슬라이드 제어 요소에 디자인 및 값 설정
+
+*/
+.slide_track {
+  position: absolute;
+  width: 250px;
+  height: 300px;
+  left: calc(50vh - 200px);
+  transform: perspective(1000px);
+  transform-style: preserve-3d;
+  animation: autoShow 20s linear infinite;
+  top: 10%;
+}
+
+/* 개선 내용 >  
+1. 슬라이드 제어 요소에서 슬라이드 요소로 선택자 전환
+*/
+.slide {
+  position: absolute;
+  inset: 0 0 0 0;
+  transform: rotateY(calc((var(--total) - 1) * (360 / var(--child)) * 1deg))
+    translateZ(500px);
+}
+
+.slide img {
+  object-fit: cover;
+  border: none;
+  border: 20px;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+/* 개선 내용 :
+1.포지션 수정
+2.너비에 최소 값으로 2가지 값 부여
+3. 플렉스 줄바꿈, 주축과 교차축 정렬 값 추가
+
+*/
+.content {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: min(1400px, 100vw);
+  height: 10%;
+  padding: 10px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 개선 내용: 포지션 값 수정 */
+.content_head {
+  font-size: 1.5rem;
+  line-height: 200%;
+  color: rgba(0, 0, 0, 0.5);
+  position: relative;
+}
+
+/* 개선 내용 : 포지션 값,콘텐츠 값 수정 */
+.content_head::after {
+  position: relative;
+  inset: 0 0 0 0;
+  content: "hi~~~~~";
+  -webkit-text-stroke: 5px solid #f00;
+  color: #f00;
+}
+
+.author {
+  font-size: 1.5rem;
+  text-align: center;
+  max-width: 100px;
+}
+
+.author h3 {
+  font-size: 1rem;
+  text-wrap: none;
+}
+
+@keyframes autoShow {
+  from {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(0);
+  }
+  to {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+  }
+}

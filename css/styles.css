@@ -1,0 +1,110 @@
+/* eng font */
+/* font-family: "Agdasima", sans-serif;
+  font-weight: 700;
+  font-style: normal; */
+
+/* kor font */
+/* font-family: "Dongle", sans-serif; 
+  font-weight: 400;
+  font-style: normal; */
+
+/* 외부 폰트 삽입 */
+@import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&family=Dongle&display=swap");
+
+/* 개선 작업 내용 
+1. 슬라이드 컨테이너 에서 너비와 높이 값 수정
+
+*/
+
+/* 전역 설정 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.layout {
+  font-family: "Agdasima", sans-serif, "Dongle";
+  font-weight: 400;
+  font-style: normal;
+  width: 100%;
+  height: 100vh;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide_container {
+  position: relative;
+  width: 1200px;
+  height: 400px;
+  left: 0;
+  top: calc(80vh-400px);
+  transform: perspective(1000px);
+  transform-style: preserve-3d;
+  animation: autoShow 20s linear infinite;
+}
+
+.slide_track {
+  position: absolute;
+  inset: 0 0 0 0;
+  transform: rotateY((var(--total) - 1) * (360deg / var(--child) * 1deg))
+    translateZ(500px);
+}
+
+.slide img {
+  object-fit: cover;
+  border: none;
+  border: 20px;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  width: 300px;
+  height: 10%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.content_head {
+  font-size: 1.5rem;
+  line-height: 200%;
+  color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+}
+
+.content_head::after {
+  position: absolute;
+  inset: 0 0 0 0;
+  content: "";
+  -webkit-text-stroke: 5px solid #f00;
+  color: #f00;
+}
+
+.author {
+  font-size: 1.5rem;
+  text-align: center;
+  max-width: 100px;
+}
+
+.author h3 {
+  font-size: 1rem;
+  text-wrap: none;
+}
+
+@keyframes autoShow {
+  from {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(0);
+  }
+  to {
+    transform: perspective(1000px) rotateX(-16deg) rotateY(360deg);
+  }
+}
